@@ -29,7 +29,7 @@ jobs:
           fetch-depth: 0
           submodules: 'true'
       - name: build
-        run: make build
+        run: make prepackage
       - name: package
         run: make package-deb 
       - name: release

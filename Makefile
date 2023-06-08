@@ -197,6 +197,20 @@ package-prepare-deb:
 	cp $(BASE_SPACE)/packaging/linux/amazon-cloudwatch-agent.conf $(BUILD_SPACE)/private/linux/arm64/deb/amazon-cloudwatch-agent-pre-pkg/
 	cp $(BASE_SPACE)/translator/config/schema.json $(BUILD_SPACE)/private/linux/arm64/deb/amazon-cloudwatch-agent-pre-pkg/amazon-cloudwatch-agent-schema.json
 
+
+	# armhf deb
+	mkdir -p $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg
+	cp $(BUILD_SPACE)/bin/linux_armhf/* $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/licensing/* $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/RELEASE_NOTES $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BUILD_SPACE)/bin/CWAGENT_VERSION $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/packaging/dependencies/amazon-cloudwatch-agent-ctl $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/packaging/dependencies/amazon-cloudwatch-agent.service $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/cfg/commonconfig/common-config.toml $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/packaging/linux/amazon-cloudwatch-agent.conf $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/
+	cp $(BASE_SPACE)/translator/config/schema.json $(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg/amazon-cloudwatch-agent-schema.json
+
+
 	cp -rf $(BASE_SPACE)/Tools $(BUILD_SPACE)/
 	cp -rf $(BASE_SPACE)/packaging $(BUILD_SPACE)/
 
