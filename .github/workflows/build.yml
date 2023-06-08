@@ -36,7 +36,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/*.deb
+            build/bin/linux/armhf/amazon-cloudwatch-agent.deb
           tag_name: ${{ github.ref }}
           body: |
             ${{ github.event.inputs.body }}

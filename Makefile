@@ -261,8 +261,6 @@ package-rpm: package-prepare-rpm
 
 .PHONY: package-deb
 package-deb: package-prepare-deb
-	ARCH=amd64 TARGET_SUPPORTED_ARCH=x86_64 PREPKGPATH="$(BUILD_SPACE)/private/linux/amd64/deb/amazon-cloudwatch-agent-pre-pkg" $(BUILD_SPACE)/Tools/src/create_deb.sh
-	ARCH=arm64 TARGET_SUPPORTED_ARCH=aarch64 PREPKGPATH="$(BUILD_SPACE)/private/linux/arm64/deb/amazon-cloudwatch-agent-pre-pkg" $(BUILD_SPACE)/Tools/src/create_deb.sh
 	ARCH=armhf TARGET_SUPPORTED_ARCH=armv7l PREPKGPATH="$(BUILD_SPACE)/private/linux/armhf/deb/amazon-cloudwatch-agent-pre-pkg" $(BUILD_SPACE)/Tools/src/create_deb.sh
 
 .PHONY: package-win
