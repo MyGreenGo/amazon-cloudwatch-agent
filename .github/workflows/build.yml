@@ -5,12 +5,13 @@ on:
 
 jobs:
 
+
   build:
     name: build
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: read
+      contents: write
     steps:
 
       - name: Set up Go 1.x
@@ -28,22 +29,15 @@ jobs:
         with:
           fetch-depth: 0
           submodules: 'true'
-
-      - name: Cache build output
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/go/pkg/mod
-            ~/.cache/go-build
-          key: v1-go-pkg-mod-${{ runner.os }}-${{ hashFiles('**/go.sum') }}
-
-      - name: Release
+      - name: build
+        run: make prepackage
+      - name: package
         run: make package-deb 
       - name: release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/*.deb
+            build/bin/linux/armhf/amazon-cloudwatch-agent.deb
           tag_name: ${{ github.ref }}
           body: |
             ${{ github.event.inputs.body }}
