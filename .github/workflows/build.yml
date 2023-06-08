@@ -5,12 +5,13 @@ on:
 
 jobs:
 
+
   build:
     name: build
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: read
+      contents: write
     steps:
 
       - name: Set up Go 1.x
