@@ -28,16 +28,9 @@ jobs:
         with:
           fetch-depth: 0
           submodules: 'true'
-
-      - name: Cache build output
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/go/pkg/mod
-            ~/.cache/go-build
-          key: v1-go-pkg-mod-${{ runner.os }}-${{ hashFiles('**/go.sum') }}
-
-      - name: Release
+      - name: build
+        run: make build
+      - name: package
         run: make package-deb 
       - name: release
         uses: softprops/action-gh-release@v1
