@@ -2,6 +2,15 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Set hostname to ethernet mac address without colons
+echo "set hostname ..."
+echo "1. Get mac address"
+MAC_ADDRESS=$(cat /sys/class/net/eth0/address | sed 's/://g')
+echo "127.0.0.1 $MAC_ADDRESS" | sudo tee -a /etc/hosts
+echo "2. Set hostname to $MAC_ADDRESS"
+sudo hostname $MAC_ADDRESS
+
+# Install aws cloudwatch agent config (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html)
 echo "set cloudwatch agent config ..."
 echo "Write aws config"
 sudo mkdir -p /root/.aws
@@ -19,3 +28,10 @@ fi
 mv $(dirname "$0")/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/
 
 sudo systemctl restart amazon-cloudwatch-agent
+
+# Add or update a cron job to restart the cloudwatch agent every day at midnight to force log stream name to update to new date
+echo "set cron job ..."
+if [ -f /etc/cron.d/restart-cloudwatch-agent ]; then
+    rm /etc/cron.d/restart-cloudwatch-agent
+fi
+echo "0 0 * * * root systemctl restart amazon-cloudwatch-agent" | sudo tee -a /etc/cron.d/restart-cloudwatch-agent
