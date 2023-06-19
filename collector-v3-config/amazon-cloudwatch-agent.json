@@ -10,7 +10,7 @@
                     {
                         "file_path": "/var/log/greengo/**.log",
                         "log_group_name": "collector-v3",
-                        "log_stream_name": "{hostname}",
+                        "log_stream_name": "{hostname}-{date}",
                         "retention_in_days": 7
                     }
                 ]
