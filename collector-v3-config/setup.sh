@@ -35,3 +35,6 @@ if [ -f /etc/cron.d/restart-cloudwatch-agent ]; then
     rm /etc/cron.d/restart-cloudwatch-agent
 fi
 echo "0 0 * * * root systemctl restart amazon-cloudwatch-agent" | sudo tee -a /etc/cron.d/restart-cloudwatch-agent
+
+# Enable cloudwatch agent service to start at boot
+sudo systemctl enable amazon-cloudwatch-agent
