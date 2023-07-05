@@ -9,6 +9,7 @@ MAC_ADDRESS=$(cat /sys/class/net/eth0/address | sed 's/://g')
 echo "127.0.0.1 $MAC_ADDRESS" | sudo tee -a /etc/hosts
 echo "2. Set hostname to $MAC_ADDRESS"
 sudo hostname $MAC_ADDRESS
+echo  $MAC_ADDRESS | sudo tee /etc/hostname
 
 # Install aws cloudwatch agent config (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html)
 echo "set cloudwatch agent config ..."
